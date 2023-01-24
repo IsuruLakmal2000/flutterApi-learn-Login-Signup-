@@ -47,6 +47,9 @@ router.route("/update/:username").patch((req,res) =>{
     );
 });
 
+
+ 
+
 router.route("/delete/:username").delete((req,res)=>{
     User.findOneAndDelete(
         {username :req.params.username},
@@ -69,6 +72,19 @@ router.route("/:username").get((req,res)=>{
                 data:result,
                 username: req.params.username,
             });
+    });
+});
+
+
+route.route("/checkusername/:username").get((req,res)=>{
+    User.findOne({username:req.params.username},(err,result)=>{
+        if(err) return res.status(500).json({msg:err});
+        if(result==null){
+            return res.status(200).json("username available");
+        }
+        else{
+            return res.status(403).json("username already taken");
+        }
     });
 });
 

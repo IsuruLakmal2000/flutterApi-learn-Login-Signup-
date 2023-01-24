@@ -108,7 +108,13 @@ class SignUpPage extends StatelessWidget {
                         _errorTextPassword == null &&
                         _errorTextCpassword == null) {
                       print("inside signup");
-                      networkHandler.get("");
+                      Map<String, String> data = {
+                        "username": _controller.text,
+                        "password": _controller2.text,
+                        "cpassword": _controller3.text,
+                      };
+                      print(data);
+                      networkHandler.post("/user/register");
                     }
                   },
                   color: Colors.yellow,
