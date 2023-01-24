@@ -7,7 +7,7 @@ const jwt =require("jsonwebtoken");
 
 const router = express.Router();    
 
-router.route("/register").post((req,res) => {
+router.route("/register/").post((req,res) => {
     console.log("inside the register");
     const user = new User({
         username : req.body.username,
