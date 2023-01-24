@@ -12,7 +12,7 @@ class SignUpPage extends StatelessWidget {
   final _controller2 = TextEditingController();
   final _controller3 = TextEditingController();
 
-  String errorText;
+  //String errorText;
   bool validate = false;
   bool Circular = false;
 

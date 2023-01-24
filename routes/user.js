@@ -12,7 +12,7 @@ router.route("/register").post((req,res) => {
     const user = new User({
         username : req.body.username,
         password : req.body.password,
-        email : req.body.email,
+        email : req.body.cpassword,
     });
     user
         .save()
