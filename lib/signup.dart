@@ -12,6 +12,10 @@ class SignUpPage extends StatelessWidget {
   final _controller2 = TextEditingController();
   final _controller3 = TextEditingController();
 
+  String errorText;
+  bool validate = false;
+  bool Circular = false;
+
   NetworkHandler networkHandler = NetworkHandler();
 
   @override
@@ -114,7 +118,7 @@ class SignUpPage extends StatelessWidget {
                         "cpassword": _controller3.text,
                       };
                       print(data);
-                      networkHandler.post("/user/register");
+                      networkHandler.post("/user/register", data);
                     }
                   },
                   color: Colors.yellow,
@@ -296,4 +300,27 @@ class SignUpPage extends StatelessWidget {
     }
     return null;
   }
+
+  // checkUser( ) async{
+  //   if(_controller.text.isEmpty){
+  //     setState(() {
+  //       validate = false;
+  //       errorText = "Username cannot be empty";
+  //     });
+  //   }else{
+  //     setState((){
+  //       validate = false;
+  //       errorText = "Username already exists";
+  //     });
+  //   }else{
+  //     var response = await networkHandler.get("/user/checkusername/${_controller.text}");
+  //     if(response["status"]){
+  //       setState((){
+  //         validate =false;
+  //         errorText = "Username already exists";
+  //       }else{
+  //         validate =true;
+  //       });
+  //   }});
+  // }
 }
