@@ -78,11 +78,11 @@ router.route("/:username").get((req,res)=>{
 
 router.route("/checkusername/:username").get((req,res)=>{
     User.findOne({username:req.params.username},(err,result)=>{
-        // if(err) return res.status(500).json({msg:err});
+         if(err) return res.status(500).json({msg:err});
         if(result==null){
             return res.json({
                 Status :true,
-                statusCode : 200,
+                
             });
         }
         else{

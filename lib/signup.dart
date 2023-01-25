@@ -318,7 +318,7 @@ class _SignUpPageState extends State<SignUpPage> {
   checkUser() async {
     var response =
         await networkHandler.get("user/checkusername/${_controller.text}");
-    if (response.statusCode == 200) {
+    if (response) {
       setState(() {
         isUnique = true;
       });
