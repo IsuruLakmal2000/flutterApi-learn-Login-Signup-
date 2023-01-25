@@ -82,6 +82,7 @@ router.route("/checkusername/:username").get((req,res)=>{
         if(result==null){
             return res.json({
                 Status :true,
+                statusCode : 200,
             });
         }
         else{
