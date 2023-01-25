@@ -5,15 +5,23 @@ import 'package:loginapp/httpHandler/networkHandler.dart';
 import 'package:loginapp/login.dart';
 import 'package:loginapp/main.dart';
 
-class SignUpPage extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
   SignUpPage({super.key});
 
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
   final _controller = TextEditingController();
+
   final _controller2 = TextEditingController();
+
   final _controller3 = TextEditingController();
 
   //String errorText;
   bool validate = false;
+
   bool Circular = false;
 
   NetworkHandler networkHandler = NetworkHandler();
@@ -117,8 +125,11 @@ class SignUpPage extends StatelessWidget {
                         "password": _controller2.text,
                         "cpassword": _controller3.text,
                       };
-                      print(data);
-                      networkHandler.post("/user/register", data);
+                      checkUser();
+                      if (isUnique) {
+                        print(data);
+                        networkHandler.post("user/register", data);
+                      }
                     }
                   },
                   color: Colors.yellow,
@@ -302,25 +313,19 @@ class SignUpPage extends StatelessWidget {
   }
 
   // checkUser( ) async{
-  //   if(_controller.text.isEmpty){
-  //     setState(() {
-  //       validate = false;
-  //       errorText = "Username cannot be empty";
-  //     });
-  //   }else{
-  //     setState((){
-  //       validate = false;
-  //       errorText = "Username already exists";
-  //     });
-  //   }else{
-  //     var response = await networkHandler.get("/user/checkusername/${_controller.text}");
-  //     if(response["status"]){
-  //       setState((){
-  //         validate =false;
-  //         errorText = "Username already exists";
-  //       }else{
-  //         validate =true;
-  //       });
-  //   }});
-  // }
+  bool isUnique = false;
+
+  checkUser() async {
+    var response =
+        await networkHandler.get("user/checkusername/${_controller.text}");
+    if (response['status']) {
+      setState(() {
+        isUnique = true;
+      });
+    } else {
+      setState(() {
+        isUnique = false;
+      });
+    }
+  }
 }

@@ -80,10 +80,14 @@ router.route("/checkusername/:username").get((req,res)=>{
     User.findOne({username:req.params.username},(err,result)=>{
         // if(err) return res.status(500).json({msg:err});
         if(result==null){
-            return res.status(200).json("username available");
+            return res.json({
+                status :true,
+            });
         }
         else{
-            return res.status(403).json("username already taken");
+            return res.json({
+                status :false,
+            });
         }
     });
 });
